@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bulma.css.map' %}">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <!-- contenedor principal -->
+    <section class="hero is-dark is-fullheight">
+
+        <!-- contenedor del header  -->
+        <div class="hero-head">
+            {% include "component/header.html" %}
+        </div>
+        <!-- fin contenedor del header  -->
+
+        <!-- contenedor del cuerpo  -->
+        <div class="hero-body">
+            <div class="container">{% block content %}{% endblock content %}</div>
+        </div>
+        <!-- fin contenedor del cuerpo  -->
+
+        <!-- contenedor del footer  -->
+        <div class="hero-foot"></div>
+        <!-- fin contenedor del footer  -->
+
+    </section>
+    <!-- Fin contenedor principal -->
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+</body>
+</html>

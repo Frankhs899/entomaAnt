@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+    <div class="tile is-ancestor">
+        <!-- nueva caja -->
+        <a class="tile is-parent" href="{% url "archivos" %}">
+            <article class="tile is-child notification is-success">
+                <div class="content">
+                    <p class="title">ARCHIVO</p>
+                    <p class="subtitle">Descarga de archivos unicos de audio y video</p>
+                    <div class="content">
+                        <!-- Content -->
+                    </div>
+                </div>
+            </article>
+        </a>
+        <!-- nueva caja -->
+        <a class="tile is-parent" href="{% url "listas" %}">
+            <article class="tile is-child notification is-success">
+                <div class="content">
+                    <p class="title">LISTAS</p>
+                    <p class="subtitle">Pensado para descargas de listas de reproducción</p>
+                    <p class="subtitle">Se piensa agregar la función de envio de archivos a google drive</p>
+                    <div class="content">
+                        <!-- Content -->
+                    </div>
+                </div>
+            </article>
+        </a>
+        <!-- nueva caja -->
+        <a class="tile is-parent" href="#">
+            <article class="tile is-child notification is-success">
+                <div class="content">
+                    <p class="title">Tall tile</p>
+                    <p class="subtitle">With even more content</p>
+                    <div class="content">
+                        <!-- Content -->
+                    </div>
+                </div>
+            </article>
+        </a>        
+    </div>
+
+{% endblock content %}
+

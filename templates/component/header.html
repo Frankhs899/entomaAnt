@@ -1,0 +1,88 @@
+<!-- COntenedor del navbar  -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+
+    <!-- navbar-brand  -->
+    <!-- el lado izquierdo , siempre visible , que suele contener el logo y opcionalmente algunos enlaces o iconos -->
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'home' %}">
+            <h1 class="title">ENTOMA</h1>
+        </a>
+
+        <!-- navbar-burger -->
+        <!-- el ícono de hamburguesa , que alterna el menú de la barra de navegación en dispositivos táctiles -->
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <!-- fin navbar-burger -->
+    </div>
+    <!-- fin navbar-brand  -->
+
+    <!-- navbar-menu -->
+    <!-- el lado derecho , oculto en dispositivos táctiles, visible en el escritorio -->
+    <div id="navbarBasicExample" class="navbar-menu">
+        <!-- navbar-start -->
+        <!-- la parte izquierda del menú, que aparece junto a la marca de la barra de navegación en el escritorio -->
+        <div class="navbar-start">
+            <a href="{% url 'archivos' %}" class="navbar-item"> Archivos </a>
+
+            <a class="navbar-item"> Listas </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link"> More </a>
+
+                <div class="navbar-dropdown">
+                    <a class="navbar-item"> About </a>
+                    <a class="navbar-item"> Jobs </a>
+                    <a class="navbar-item"> Contact </a>
+                    <hr class="navbar-divider" />
+                    <a class="navbar-item"> Report an issue </a>
+                </div>
+            </div>
+        </div>
+        <!-- fin navbar-start -->
+
+        <!-- navbar-end -->
+        <!-- la parte derecha del menú, que aparece al final de la barra de navegación -->
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a class="button is-light"> Log in </a>
+                </div>
+            </div>
+        </div>
+        <!-- fin navbar-end -->
+    </div>
+    <!-- fin navbar-menu -->
+</nav>
+<!-- Fin contenedor del navbar  -->
+
+<!-- script del menu hamburguesa  -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // obtener todos los elementos de "barra de navegación-hamburguesa"
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Añade un evento de clic en cada uno de ellos.
+        $navbarBurgers.forEach(el => {
+            el.addEventListener('click', () => {
+
+                // Obtenga el objetivo del atributo "data-target"
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+
+                //Alternar la clase "is-active" tanto en "navbar-burger" como en "navbar-menu"
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+
+            });
+        });
+
+    });
+</script>
+<!-- fin script del menu hamburguesa  -->

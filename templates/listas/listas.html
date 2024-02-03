@@ -1,0 +1,26 @@
+{% extends "listas/base.html" %}
+
+
+{% block content %}
+    <div class="container"> 
+        <h1 class="title">Listas de reproduccion</h1>
+        <!-- <form action="#" enctype="multipart/form-data"> -->
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <div class="field has-addons">
+                    <p class="control">
+                        <span class="button"><b>Url:</b></span>
+                    </p>
+                    <p class="control is-expanded">
+                        <input id="urlInput2" name="url" type="text" class="input" required autocomplete="off" >
+                    </p>
+                    <p class="control">
+                        <input type="submit" value="Consulta" class="button is-primary">
+                        <!-- <button class="button is-primary" onclick="">Consulta</button> -->
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

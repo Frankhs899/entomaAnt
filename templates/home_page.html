@@ -1,0 +1,175 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bulma.css.map' %}">
+
+    <title>Descargas</title>
+</head>
+<body>
+    <!-- contenedor principal -->
+    <section class="hero is-dark is-fullheight">
+        <!-- Cntenedor del header -->
+        <div class="hero-head">
+            <!-- Header o navbar de la parte superior, pendiente mejorar diseño -->
+            <!-- COntenedor del navbar  -->
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+
+                <!-- navbar-brand  -->
+                <!-- el lado izquierdo , siempre visible , que suele contener el logo y opcionalmente algunos enlaces o iconos -->
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{% url 'home_page' %}">
+                        <h1 class="title">ENTOMA</h1>
+                    </a>
+
+                    <!-- navbar-burger -->
+                    <!-- el ícono de hamburguesa , que alterna el menú de la barra de navegación en dispositivos táctiles -->
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                        data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                    <!-- fin navbar-burger -->
+                </div>
+                <!-- fin navbar-brand  -->
+
+                <!-- navbar-menu -->
+                <!-- el lado derecho , oculto en dispositivos táctiles, visible en el escritorio -->
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <!-- navbar-start -->
+                    <!-- la parte izquierda del menú, que aparece junto a la marca de la barra de navegación en el escritorio -->
+                    <div class="navbar-start">
+                        <a href="{% url 'home_page' %}" class="navbar-item"> Home </a>
+
+                        <a class="navbar-item"> Documentation </a>
+
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link"> More </a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item"> About </a>
+                                <a class="navbar-item"> Jobs </a>
+                                <a class="navbar-item"> Contact </a>
+                                <hr class="navbar-divider" />
+                                <a class="navbar-item"> Report an issue </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin navbar-start -->
+
+                    <!-- navbar-end -->
+                    <!-- la parte derecha del menú, que aparece al final de la barra de navegación -->
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-primary">
+                                    <strong>Sign up</strong>
+                                </a>
+                                <a class="button is-light"> Log in </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin navbar-end -->
+                </div>
+                <!-- fin navbar-menu -->
+            </nav>
+            <!-- Fin contenedor del navbar  -->
+        </div>
+        <!-- Fin contenedor del header -->
+
+        <!-- Contenedor central -->
+        <div class="hero-body">
+
+            <!-- Contenedor formulario -->
+            <div class="container">
+                <h1 class="title has-text-centered">Bienvenido a Entoma</h1>
+                <h2 class="subtitle has-text-centered">Entorno desarrollado para descarga de musica</h2>
+                <!-- Formulario  -->
+                <form action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Contenedor de campos -->
+                    <div class="field">
+                        <!-- Contenedor has-addons -->
+                        <!-- Permite pegar todos los elementos -->
+                        <div class="field has-addons">
+                            <p class="control">
+                                <span class="button"><b>Url:</b></span>
+                            </p>
+                            <p class="control is-expanded">
+                                <input id="urlInput" name="url" class="input" type="text"
+                                    placeholder="La url debe iniciar con: https://www.youtube.com/..." required
+                                    autocomplete="off">
+                            </p>
+                            <p class="control">
+                                <button type="button" class="button is-primary"
+                                    onclick="obtenerInformacion()"><b>Consulta</b></button>
+                            </p>
+                        </div>
+                        <!-- Fin contenedor has-addons -->
+                    </div>
+                    <!-- Fin contenedor de campos -->
+
+                    <!-- Contenedor de info y botones  -->
+                    <div class="container">
+                        <!-- Contenedor de informacion  -->
+                        <div id="infoContainer" class="is-dark">
+                            <p><b>Título:</b> <span id="titulo">{{ video_info.title }}</span></p>
+                            <p><b>Duración:</b> <span id="duracion">{{ video_info.duration }}</span></p>
+                        </div>
+                        <!-- Fin contenedor de informacion  -->
+
+                        <!-- Contenedor botones -->
+                        <div class="field is-grouped is-grouped-centered">
+                            <p class="control">
+                                <button type="button" class="button is-primary"
+                                    onclick="iniciarDescarga('video')">Descargar Video</button>
+                            </p>
+                            <p class="control">
+                                <button type="button" class="button is-primary"
+                                    onclick="iniciarDescargaA('audio')">Descargar Audio</button>
+                            </p>
+                        </div>
+                        <!-- Fin contenedor botones -->
+                    </div>
+                    <!-- Contenedor de info y botones  -->
+                </form>
+                <!-- Fin formulario  -->
+
+                <!-- Ventana modal  -->
+                <div id="modal" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box" id="linkContainer">
+                            <p id="mensajeModal" class="has-text-centered" >Solicitud en trámite por favor espere</p>
+                            <div class="field is-grouped is-grouped-centered">
+                                <a href="{{ file_path.url }}" id="descargaUsuario" class="button is-success" style="display: none;"
+                                download>
+                                    Descargar
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close" onclick="cerrarModal()"></button>
+                </div>
+                <!-- Fin ventana modal  -->
+            </div>
+            <!-- Fin contenedor formulario -->
+        </div>
+        <!-- Fin contenedor central -->
+
+        <!-- Contenedor del footer  -->
+        <!-- pendiente -->
+        <div class="hero-foot"></div>
+        <!-- Fin contenedor del footer  -->
+    </section>
+    <!-- Fin contenedor principal  -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'js/consulta.js' %}"></script>
+</body>
+</html>

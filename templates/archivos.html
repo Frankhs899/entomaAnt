@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Descarga de archivos{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title has-text-centered">Bienvenido a Entoma</h1>
+    <h2 class="subtitle has-text-centered">Entorno desarrollado para descarga de musica</h2>
+    <!-- Formulario  -->
+    <form action="#" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Contenedor de campos -->
+        <div class="field">
+            <!-- Contenedor has-addons -->
+            <!-- Permite pegar todos los elementos -->
+            <div class="field has-addons">
+                <p class="control">
+                    <span class="button"><b>Url:</b></span>
+                </p>
+                <p class="control is-expanded">
+                    <input id="urlInput" name="url" class="input" type="text"
+                        placeholder="La url debe iniciar con: https://www.youtube.com/..." required autocomplete="off">
+                </p>
+                <p class="control">
+                    <button type="button" class="button is-primary"
+                        onclick="obtenerInformacion()"><b>Consulta</b></button>
+                </p>
+            </div>
+            <!-- Fin contenedor has-addons -->
+        </div>
+        <!-- Fin contenedor de campos -->
+
+        <!-- Contenedor de info y botones  -->
+        <div class="container">
+            <!-- Contenedor de informacion  -->
+            <div id="infoContainer" class="is-dark">
+                <p><b>Título:</b> <span id="titulo">{{ video_info.title }}</span></p>
+                <p><b>Duración:</b> <span id="duracion">{{ video_info.duration }}</span></p>
+            </div>
+            <!-- Fin contenedor de informacion  -->
+
+            <!-- Contenedor botones -->
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <button type="button" class="button is-primary" onclick="iniciarDescarga('video')">Descargar
+                        Video</button>
+                </p>
+                <p class="control">
+                    <button type="button" class="button is-primary" onclick="iniciarDescargaA('audio')">Descargar
+                        Audio</button>
+                </p>
+            </div>
+            <!-- Fin contenedor botones -->
+        </div>
+        <!-- Contenedor de info y botones  -->
+    </form>
+    <!-- Fin formulario  -->
+
+    <!-- Ventana modal  -->
+    <div id="modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box" id="linkContainer">
+                <p id="mensajeModal" class="has-text-centered">Solicitud en trámite por favor espere</p>
+                <div class="field is-grouped is-grouped-centered">
+                    <a href="{{ fileUrl.url }}" id="descargaUsuario" class="button is-success" style="display: none;"
+                        download>
+                        Descargar
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="cerrarModal()"></button>
+    </div>
+    <!-- Fin ventana modal  -->
+</div>
+{% endblock content %}
